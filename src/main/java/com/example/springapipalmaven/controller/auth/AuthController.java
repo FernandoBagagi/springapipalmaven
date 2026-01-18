@@ -1,6 +1,5 @@
 package com.example.springapipalmaven.controller.auth;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +22,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ParTokens login(@RequestBody LoginRequest request) {
-        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //System.out.println(encoder.encode("123456"));
-
-        //System.out.println("entra aqui");
+        
         this.service.validarLogin(request.username(), request.password());
-        //System.out.println("entra aqui 2");
+        
         return this.service.gerarTokens(request.username());
 
     }
