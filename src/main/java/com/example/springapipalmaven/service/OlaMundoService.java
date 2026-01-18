@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.springapipalmaven.domain.OlaMundo;
 import com.example.springapipalmaven.dto.OlaMundoDto;
 import com.example.springapipalmaven.mapper.OlaMundoMapper;
+import com.example.springapipalmaven.model.OlaMundo;
 import com.example.springapipalmaven.repository.OlaMundoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,9 @@ public class OlaMundoService {
     public OlaMundoDto findById(final Long id) {
 
         final OlaMundo model = this.repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Item de id " + id + " não encontrado!"));
+                .orElseThrow(
+                        // TODO: Criar Exception para Item não encontrado
+                        () -> new RuntimeException("Item de id " + id + " não encontrado!"));
 
         model.setName(model.getName() + " Teste");
 
@@ -37,4 +39,5 @@ public class OlaMundoService {
                 .toList();
 
     }
+    
 }

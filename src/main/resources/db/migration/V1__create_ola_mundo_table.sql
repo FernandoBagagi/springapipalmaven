@@ -2,5 +2,4 @@
 CREATE TABLE `ola_mundo` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `ola_mundo_id_UNIQUE` (`id` ASC) VISIBLE);
+  PRIMARY KEY (`id`));

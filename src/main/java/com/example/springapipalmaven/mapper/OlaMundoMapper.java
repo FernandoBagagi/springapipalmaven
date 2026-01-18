@@ -2,8 +2,8 @@ package com.example.springapipalmaven.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.example.springapipalmaven.domain.OlaMundo;
 import com.example.springapipalmaven.dto.OlaMundoDto;
+import com.example.springapipalmaven.model.OlaMundo;
 
 @Component
 public class OlaMundoMapper implements ModelDtoMapper<OlaMundo, OlaMundoDto> {
@@ -16,8 +16,8 @@ public class OlaMundoMapper implements ModelDtoMapper<OlaMundo, OlaMundoDto> {
         }
 
         final OlaMundo model = new OlaMundo();
-        model.setId(dto.getId());
-        model.setName(dto.getName());
+        model.setId(dto.id());
+        model.setName(dto.name());
 
         return model;
 
@@ -30,11 +30,7 @@ public class OlaMundoMapper implements ModelDtoMapper<OlaMundo, OlaMundoDto> {
             return null;
         }
 
-        final OlaMundoDto dto = new OlaMundoDto();
-        dto.setId(model.getId());
-        dto.setName(model.getName());
-
-        return dto;
+        return new OlaMundoDto(model.getId(), model.getName());
 
     }
 
