@@ -11,6 +11,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
 import com.example.springapipalmaven.dto.ParTokens;
+import com.example.springapipalmaven.exception.LoginInvalidoException;
+import com.example.springapipalmaven.exception.RefreshTokenExpiradoException;
+import com.example.springapipalmaven.exception.RefreshTokenInvalidoException;
 import com.example.springapipalmaven.model.RefreshToken;
 import com.example.springapipalmaven.model.Usuario;
 import com.example.springapipalmaven.repository.RefreshTokenRepository;
@@ -39,10 +42,9 @@ public class TokenService {
             authManager.authenticate(auth);
 
         } catch (AuthenticationException e) {
-
+            
             e.printStackTrace();
-            // TODO: Criar Exception para login e/ou senha inválidos
-            //throw new RuntimeException("Username e/ou senha inválidos");
+            throw new LoginInvalidoException();
 
         }
 
@@ -51,13 +53,10 @@ public class TokenService {
     public RefreshToken validarToken(String token) {
 
         final RefreshToken refreshToken = this.refreshTokenRepository.findByToken(token)
-                .orElseThrow(
-                        // TODO: Criar Exception para RefreshToken não encontrado
-                        () -> new RuntimeException("Refresh token inválido"));
+                .orElseThrow(RefreshTokenInvalidoException::new);
 
         if (refreshToken.getExpiresAt().isBefore(Instant.now())) {
-            // TODO: Criar Exception para RefreshToken expirado
-            throw new RuntimeException("Refresh token expirado");
+            throw new RefreshTokenExpiradoException();
         }
 
         return refreshToken;
