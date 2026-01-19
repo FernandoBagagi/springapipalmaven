@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.springapipalmaven.dto.ApiErrorResponse;
 import com.example.springapipalmaven.exception.ApiException;
+import com.example.springapipalmaven.service.LogService;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 
-@Slf4j
 @RestControllerAdvice
+@RequiredArgsConstructor
 public class ApiExceptionHandler {
+
+    private final LogService logService;
 
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ApiErrorResponse> handleApiException(ApiException e) {
@@ -24,7 +27,7 @@ public class ApiExceptionHandler {
                 e.getMessage(),
                 e.getTimestamp());
 
-        this.gerarLogs(body, e);
+        logService.gerarApiErrorLogs(body, e);
 
         return ResponseEntity
                 .status(e.getStatus())
@@ -40,7 +43,7 @@ public class ApiExceptionHandler {
                 "Erro de runtime interno inesperado",
                 Instant.now());
 
-        this.gerarLogs(body, e);
+        logService.gerarApiErrorLogs(body, e);
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -56,28 +59,12 @@ public class ApiExceptionHandler {
                 "Erro interno inesperado",
                 Instant.now());
 
-        this.gerarLogs(body, e);
+        logService.gerarApiErrorLogs(body, e);
 
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(body);
 
-    }
-
-    private void gerarWarnLog(ApiErrorResponse body) {
-        log.warn("{} Erro de negócio [{}]: {}",
-                body.timestamp(),
-                body.code(),
-                body.message());
-    }
-
-    private void gerarErrorLog(String msgErro, Throwable t) {
-        log.error(msgErro, t);
-    }
-
-    private void gerarLogs(ApiErrorResponse body, Throwable t) {
-        this.gerarWarnLog(body);
-        this.gerarErrorLog(body.message(), t);
     }
 
 }
