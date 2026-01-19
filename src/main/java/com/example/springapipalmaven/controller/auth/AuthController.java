@@ -1,5 +1,6 @@
 package com.example.springapipalmaven.controller.auth;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,20 +22,20 @@ public class AuthController {
     private final TokenService service;
 
     @PostMapping("/login")
-    public ParTokens login(@RequestBody LoginRequest request) {
+    public ResponseEntity<ParTokens> login(@RequestBody LoginRequest request) {
         
         this.service.validarLogin(request.username(), request.password());
         
-        return this.service.gerarTokens(request.username());
+        return ResponseEntity.ok(this.service.gerarTokens(request.username()));
 
     }
 
     @PostMapping("/refresh")
-    public ParTokens refresh(@RequestBody RefreshTokenRequest request) {
+    public ResponseEntity<ParTokens> refresh(@RequestBody RefreshTokenRequest request) {
 
         final RefreshToken refreshToken = this.service.validarToken(request.token());
 
-        return this.service.gerarTokens(refreshToken);
+        return ResponseEntity.ok(this.service.gerarTokens(refreshToken));
 
     }
 
