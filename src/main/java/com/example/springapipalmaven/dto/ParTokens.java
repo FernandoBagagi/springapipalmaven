@@ -1,4 +1,6 @@
 package com.example.springapipalmaven.dto;
 
-public record ParTokens(String accessToken, String refreshToken) {
+public record ParTokens(
+        String accessToken,
+        String refreshToken) {
 }

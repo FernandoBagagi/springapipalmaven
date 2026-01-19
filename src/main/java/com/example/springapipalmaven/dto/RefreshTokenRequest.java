@@ -1,4 +1,5 @@
 package com.example.springapipalmaven.dto;
 
-public record RefreshTokenRequest(String token) {
+public record RefreshTokenRequest(
+        String token) {
 }
