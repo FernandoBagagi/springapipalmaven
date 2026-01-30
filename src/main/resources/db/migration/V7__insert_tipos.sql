@@ -1,14 +1,14 @@
 
 INSERT INTO
-    `tipos` (`codigo_enum`, `nome`)
+    `tipos` (`id`,`codigo_enum`, `nome`)
 VALUES
-    ('GRAMA', 'Grama'),
-    ('TERRA', 'Terra'),
-    ('ELETRICO', 'Elétrico'),
-    ('AGUA', 'Água'),
-    ('FOGO', 'Fogo'),
-    ('GELO', 'Gelo'),
-    ('DRACONICO', 'Dracônico'),
-    ('ESCURIDAO', 'Escuridão'),
-    ('NAO_ELEMENTAL', 'Não elemental');
+    (1,'GRAMA', 'Grama'),
+    (2,'TERRA', 'Terra'),
+    (3,'ELETRICO', 'Elétrico'),
+    (4,'AGUA', 'Água'),
+    (5,'FOGO', 'Fogo'),
+    (6,'GELO', 'Gelo'),
+    (7,'DRACONICO', 'Dracônico'),
+    (8,'ESCURIDAO', 'Escuridão'),
+    (9,'NAO_ELEMENTAL', 'Não elemental');
     
