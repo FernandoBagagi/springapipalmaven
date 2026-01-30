@@ -13,7 +13,7 @@ CREATE TABLE `pals_aptidoes` (
       FOREIGN KEY (`pal_id`)
       REFERENCES `pals` (`id`)
       ON DELETE CASCADE
-      ON UPDATE CASCADE
+      ON UPDATE CASCADE,
 
     CONSTRAINT `fk_pals_aptidoes_aptidao_id`
       FOREIGN KEY (`aptidao_id`)
