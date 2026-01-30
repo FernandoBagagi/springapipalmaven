@@ -3,43 +3,62 @@
 
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{page.title}">Home</title>
+    <title>Palmaven</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" type="image/png" th:href= "@{/images/favicon.png}">
 </head>
 
 <body>
 
-    <div class="container">
+    <h1>Palmaven</h1>
 
-        <img class="logo" th:src="@{/images/palworld-logo.png}" alt="Logo">
+    <div class="paldex">
 
-        <h2 th:text="#{welcome.message}">Bem-vindo</h2>
+        <div class="card" th:each="pal : ${pals}">
 
-        <div th:if="${#lists.isEmpty(items)}">
-            <p th:text="#{list.empty}">A lista ainda não tem itens</p>
+            <div class="head-card">
+
+                <div class="container-numero">
+                    <h2 th:text="${pal.numero}">000B<h2>
+                </div>
+
+                <div class="nome">
+                    <h2 th:text="${pal.nome}">Sem nome</h2>
+                </div>
+
+                <div class="tipos">
+                    <img th:each="palTipo : ${pal.tipos}"
+                        th:src="@{/images/tipos/{tipo}.png(tipo=${palTipo.tipo.codigoEnum})}"
+                        th:alt="${palTipo.tipo.nome}" />
+                </div>
+
+            </div>
+
+            <div class="body-card">
+
+                <div class="aptidoes">
+
+                    <div class="aptidao" th:each="palAptidao : ${pal.aptidoes}">
+                        <img th:src="@{/images/aptidoes/{aptidao}.png(aptidao=${palAptidao.aptidao.codigoEnum})}"
+                            th:alt="${palAptidao.aptidao.nome}" />
+                        <h2 th:text="${palAptidao.nivel}">0</h2>
+                    </div>
+
+                </div>
+
+                <img th:src="@{/images/pals/{numero}.png(numero=${pal.numero})}" th:alt="${pal.nome}" />
+
+            </div>
+
         </div>
 
-        <table th:unless="${#lists.isEmpty(items)}">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th th:text="#{table.name}">Nome</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${items}">
-                    <td th:text="${item.id}"></td>
-                    <td th:text="${item.name}"></td>
-                </tr>
-            </tbody>
-        </table>
 
-        <div class="languages">
-            <a href="/?lang=pt_BR">PT</a> |
-            <a href="/?lang=en">EN</a> |
-            <a href="/?lang=es">ES</a>
-        </div>
+    </div>
 
+    <div class="languages">
+        <a href="/?lang=pt_BR">PT</a> |
+        <a href="/?lang=en">EN</a> |
+        <a href="/?lang=es">ES</a>
     </div>
 
     <script th:src="@{/js/home.js}"></script>
