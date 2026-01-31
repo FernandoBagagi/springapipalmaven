@@ -4,6 +4,8 @@
 
 body {
     width: 100%;
+    margin: 0px;
+    padding: 0px;
     background-color: #E7FBFF;
 }
 
@@ -19,11 +21,11 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill, 320px);
     gap: 24px;
-    justify-content: center;
-    padding: 0 40px;
+    justify-content: space-evenly;
+    padding: 0px 10px;
+    margin: 0px;
 }
 
-/* CARD */
 .card {
     width: 320px;
     height: 300px;
@@ -35,7 +37,6 @@ h1 {
     overflow: hidden;
 }
 
-/* HEAD */
 .head-card {
     display: flex;
     flex-direction: row;
@@ -85,14 +86,12 @@ h2 {
     height: 24px;
 }
 
-/* BODY */
 .body-card {
     display: flex;
     flex: 1;
     flex-direction: row;
 }
 
-/* APTIDÕES */
 .aptidoes {
     display: flex;
     flex-direction: column;
@@ -107,8 +106,7 @@ h2 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    gap: 10px;
+    justify-content: space-evenly;
 }
 
 .aptidao > img {
